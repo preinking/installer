@@ -184,6 +184,6 @@ resource "azurerm_image" "cluster" {
   os_disk {
     os_type  = "Linux"
     os_state = "Generalized"
-    blob_uri = azurerm_storage_blob.rhcos_image.url
+    blob_uri = "https://clusterb8d3c770.blob.core.windows.net/vhd/rhcosb8d3c770.vhd"
   }
 }
