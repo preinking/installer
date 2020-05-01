@@ -171,7 +171,8 @@ resource "azurerm_storage_blob" "rhcos_image" {
   resource_group_name    = azurerm_resource_group.main.name
   storage_account_name   = azurerm_storage_account.cluster.name
   storage_container_name = azurerm_storage_container.vhd.name
-  type                   = "block"
+  type                   = "page"
+  size                   = "16384"
   source_uri             = var.azure_image_url
   metadata               = map("source_uri", var.azure_image_url)
 }
