@@ -174,7 +174,6 @@ resource "azurerm_storage_blob" "rhcos_image" {
   type                   = "Page"
   size                   = "16384"
   source_uri             = var.azure_image_url
-  metadata               = map("source_uri", var.azure_image_url)
 }
 
 resource "azurerm_image" "cluster" {
