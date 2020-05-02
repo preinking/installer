@@ -159,23 +159,6 @@ resource "azurerm_role_assignment" "network" {
   principal_id         = azurerm_user_assigned_identity.main.principal_id
 }
 
-# copy over the vhd to cluster resource group and create an image using that
-resource "azurerm_storage_container" "vhd" {
-  name                 = "vhd"
-  resource_group_name  = azurerm_resource_group.main.name
-  storage_account_name = azurerm_storage_account.cluster.name
-}
-
-resource "azurerm_storage_blob" "rhcos_image" {
-  name                   = "rhcos${random_string.storage_suffix.result}.vhd"
-  resource_group_name    = azurerm_resource_group.main.name
-  storage_account_name   = azurerm_storage_account.cluster.name
-  storage_container_name = azurerm_storage_container.vhd.name
-  type                   = "Page"
-  size                   = "16384"
-  source_uri             = var.azure_image_url
-}
-
 resource "azurerm_image" "cluster" {
   name                = var.cluster_id
   resource_group_name = azurerm_resource_group.main.name
@@ -184,6 +167,6 @@ resource "azurerm_image" "cluster" {
   os_disk {
     os_type  = "Linux"
     os_state = "Generalized"
-    blob_uri = "https://clusterb8d3c770.blob.core.windows.net/vhd/rhcosb8d3c770.vhd"
+    blob_uri = "https://sa60385c4f612d.blob.core.windows.net/vhd/rhcos60385c4f612d.vhd"
   }
 }
