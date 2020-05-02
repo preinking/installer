@@ -238,7 +238,7 @@ func (m *Master) Generate(dependencies asset.Parents) error {
 	case azuretypes.Name:
 		mpool := defaultAzureMachinePoolPlatform()
 		mpool.InstanceType = azuredefaults.ControlPlaneInstanceType(installConfig.Config.Platform.Azure.Region)
-		mpool.OSDisk.DiskSizeGB = 512
+		mpool.OSDisk.DiskSizeGB = 128
 		mpool.Set(ic.Platform.Azure.DefaultMachinePlatform)
 		mpool.Set(pool.Platform.Azure)
 		if len(mpool.Zones) == 0 {
